@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta para la ratona</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .sobre {
+            width: 400px; /* Tamaño más grande para el sobre */
+            height: 200px; /* Tamaño proporcional al ancho */
+            background-color: pink;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .corazon {
+            width: 80px;
+            height: 80px;
+            background-color: pink;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 20px; /* Alineado con la parte inferior del sobre */
+        }
+        .corazon span {
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            user-select: none;
+        }
+        .carta {
+            display: none;
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 30px;
+            border-radius: 5px;
+            z-index: 10;
+            width: 50%; /* Ancho más grande para la carta */
+            max-width: 500px; /* Ancho máximo para la carta */
+            top: 10%; /* Posición más arriba */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .ramo-rosas {
+            display: none;
+            position: fixed;
+            bottom: 10%; /* Posición desde la parte inferior de la pantalla */
+            z-index: 5;
+            left: 50%; /* Centrar horizontalmente */
+            transform: translateX(-50%);
+            width: 200px; /* Ancho del ramo de rosas */
+        }
+        .petalo {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 9s ease-out;
+        }
+        /* Animaciones y otras clases aquí */
+    </style>
+</head>
+<body>
+    <div class="sobre" onclick="mostrarCarta()">
+        <div class="corazon"><span>Da clic aquí amor</span></div>
+    </div>
+    <div class="carta">
+        <h1>Ratona, changuito, amor...</h1>
+        <p>Esta vez no tuve tiempo de darte una rosa, pero te hice esta carta para que sepas que te amo y que espero nos sigamos amando y queriendo toda la vida.</p>
+        <p>Con amor eterno,</p>
+        <p>Tu amor,</p>
+    </div>
+    <!-- Sustituye 'URL_DE_TU_IMAGEN' con la ruta de acceso a tu imagen de ramo de rosas -->
+    <img src="https://github.com/SalvadorQuiroz7/carta/main/images/68338-OCNMM8-546.jpg?raw=true" class="ramo-rosas" alt="Ramo de rosas">
+
+    <!-- Contenedores para los pétalos de rosa -->
+    <div id="petalos-container"></div>
+
+    <script>
+        function mostrarCarta() {
+            var sobre = document.querySelector('.sobre');
+            var carta = document.querySelector('.carta');
+            var ramoRosas = document.querySelector('.ramo-rosas');
+            var petalosContainer = document.getElementById('petalos-container');
+
+            // Ocultar el sobre y mostrar la carta
+            sobre.style.display = 'none';
+            carta.style.display = 'block';
+
+            // Crear y mostrar pétalos de rosa
+            for (let i = 0; i < 100; i++) {
+                let petalo = document.createElement('div');
+                petalo.className = 'petalo';
+                petalo.style.left = Math.random() * window.innerWidth + 'px';
+                petalo.style.top = Math.random() * window.innerHeight + 'px';
+                petalosContainer.appendChild(petalo);
+                setTimeout(() => {
+                    petalo.style.opacity = 1;
+                    petalo.style.top = (window.innerHeight + 20) + 'px';
+                }, 10 + i * 30); // i * 30 dará un pequeño retraso entre cada pétalo
+            }
+
+            // Mostrar el ramo de rosas después de que los pétalos se dispersan
+            setTimeout(function() {
+                ramoRosas.style.display = 'block';
+            }, 6000); // Tiempo después de que los pétalos se dispersan
+        }
+    </script>
+</body>
+</html>
